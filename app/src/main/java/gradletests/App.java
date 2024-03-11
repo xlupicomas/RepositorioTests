@@ -3,12 +3,100 @@
  */
 package gradletests;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.io.IOException;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public class Biblioteca {
+        private String nombre;
+        private String autor;
+        ArrayList<Biblioteca> Libros = new ArrayList<Biblioteca>();
+
+        public Biblioteca(String nombre1, String autor1) {
+            nombre = nombre1;
+            autor = autor1;
+        }
+
+        public ArrayList anadirLibro() {
+            Biblioteca libro1 = new Biblioteca(nombre, autor);
+            Libros.add(libro1);
+            return Libros;
+        }
+
+        public ArrayList eliminarUsuario(String name1) {
+            int x = 0;
+            int bucle = 0;
+            String name = name1;
+            while (bucle < Libros.size()) {
+                if (Libros.get(x).nombre == name) {
+                    Libros.remove(x);
+                } else {
+                    x++;
+                }
+            }
+            return Libros;
+        }
+
+        public ArrayList llistar_llibres() {
+            int bucle = 0;
+            while (bucle < Libros.size()) {
+                System.out.println(Libros.get(bucle));
+                bucle++;
+            }
+            return Libros;
+        }
     }
 
+    public class Usuario {
+        private String nombre;
+        private String correo;
+        private static ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+
+        public Usuario(String nombres, String correos) {
+            nombre = nombres;
+            correo = correos;
+        }
+
+        public ArrayList anadirUsuario(String nombres, String correos) {
+            Usuario Usuario1 = new Usuario(nombre, correo);
+            Usuarios.add(Usuario1);
+            return Usuarios;
+        }
+
+        public ArrayList eliminarUsuario(String name1) {
+            int x = 0;
+            int bucle = 0;
+            String name = name1;
+            while (bucle < Usuarios.size()) {
+                if (Usuarios.get(x).nombre == name) {
+                    Usuarios.remove(x);
+                } else {
+                    x++;
+                }
+            }
+            return Usuarios;
+        }
+
+        public static ArrayList<Usuario> getUsuarios() {
+            return Usuarios;
+        }
+    }
+
+    public class Lecturas {
+        HashMap<String, ArrayList<String>> leidos;
+        
+        public Lecturas(){
+            leidos = new HashMap<>();
+        }
+        public void AñadirLibro(String libro, String usuario){
+            leidos.get(usuario).add(libro);
+        }
+        public ArrayList<String> getLibrosLeidos(String usuario) {
+            return leidos.get(usuario);
+        }
+    }
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Usuario.añadirUsuario("usuario1", "correo1");
     }
 }
