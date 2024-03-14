@@ -5,98 +5,151 @@ package gradletests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.IOException;
 
 public class App {
-    public class Biblioteca {
+    public class Libro {
         private String nombre;
         private String autor;
-        ArrayList<Biblioteca> Libros = new ArrayList<Biblioteca>();
+    public Libro(String nombre, String autor) {
+        this.nombre = nombre;
+        this.autor = autor;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getAutor() {
+        return autor;
+    }
+    public void setCorreo(String correo) {
+        this.autor = correo;
+    }
+}
 
-        public Biblioteca(String nombre1, String autor1) {
-            nombre = nombre1;
-            autor = autor1;
+    public class Biblioteca {
+        ArrayList<Libro> libros = new ArrayList<Libro>();
+
+
+        public Biblioteca() {
+            libros = new ArrayList<Libro>();
+        }
+        public String getNombre(int i) {
+            return libros.get(i).getNombre();
+        }
+        public String getCorreo(int i) {
+            return libros.get(i).getAutor();
         }
 
-        public ArrayList anadirLibro() {
-            Biblioteca libro1 = new Biblioteca(nombre, autor);
-            Libros.add(libro1);
-            return Libros;
+
+        public ArrayList<Libro> anadirLibros(Libro libro) {
+            libros.add(libro);
+            return libros;
         }
 
-        public ArrayList eliminarUsuario(String name1) {
+        public ArrayList<Libro> eliminarLibros(String name1) {
             int x = 0;
             int bucle = 0;
             String name = name1;
-            while (bucle < Libros.size()) {
-                if (Libros.get(x).nombre == name) {
-                    Libros.remove(x);
+            while (bucle < libros.size()) {
+                if (libros.get(x).nombre == name) {
+                    libros.remove(x);
                 } else {
                     x++;
                 }
             }
-            return Libros;
+            return libros;
         }
 
-        public ArrayList llistar_llibres() {
+        public ArrayList<Libro> llistar_llibres() {
             int bucle = 0;
-            while (bucle < Libros.size()) {
-                System.out.println(Libros.get(bucle));
+            while (bucle < libros.size()) {
+                System.out.println(libros.get(bucle));
                 bucle++;
             }
-            return Libros;
+            return libros;
         }
     }
 
     public class Usuario {
         private String nombre;
         private String correo;
-        private static ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+        public Usuario(String nombre, String correo) {
+            this.nombre = nombre;
+            this.correo = correo;
+        }
+        public String getNombre() {
+            return nombre;
+        }
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+        public String getCorreo() {
+            return correo;
+        }
+        public void setCorreo(String correo) {
+            this.correo = correo;
+        }
+    }
 
-        public Usuario(String nombres, String correos) {
-            nombre = nombres;
-            correo = correos;
+    public class Usuarios {
+        private static ArrayList<Usuario> usuarios;
+
+        public Usuarios() {
+            usuarios = new ArrayList<Usuario>();
+        }
+        public String getNombre(int i) {
+            return usuarios.get(i).getNombre();
+        }
+        public String getCorreo(int i) {
+            return usuarios.get(i).getCorreo();
         }
 
-        public ArrayList anadirUsuario(String nombres, String correos) {
-            Usuario Usuario1 = new Usuario(nombre, correo);
-            Usuarios.add(Usuario1);
-            return Usuarios;
+        public ArrayList<Usuario> anadirUsuario(Usuario usuario) {
+            usuarios.add(usuario);
+            return usuarios;
+        }
+        public void verUsuario(Usuario usuario) {
+            for(int x = 0; x < usuarios.size(); x++){
+              usuarios.get(x);
+              System.out.print(usuarios.get(x).getNombre() + " ");
+              System.out.print(usuarios.get(x).getCorreo());
+            }
+            
         }
 
-        public ArrayList eliminarUsuario(String name1) {
+        public ArrayList<Usuario> eliminarUsuario(String name1) {
             int x = 0;
             int bucle = 0;
             String name = name1;
-            while (bucle < Usuarios.size()) {
-                if (Usuarios.get(x).nombre == name) {
-                    Usuarios.remove(x);
+            while (bucle < usuarios.size()) {
+                if (usuarios.get(x).getNombre() == name) {
+                    usuarios.remove(x);
                 } else {
                     x++;
                 }
             }
-            return Usuarios;
+            return usuarios;
         }
 
         public static ArrayList<Usuario> getUsuarios() {
-            return Usuarios;
+            return usuarios;
         }
     }
 
     public class Lecturas {
-        HashMap<String, ArrayList<String>> leidos;
+        HashMap<Object, ArrayList<Libro>> leidos;
         
         public Lecturas(){
             leidos = new HashMap<>();
         }
-        public void AñadirLibro(String libro, String usuario){
-            leidos.get(usuario).add(libro);
+        public HashMap<Object, ArrayList<Libro>> AnadirLibro(ArrayList<Libro> libro, Object usuario){
+            leidos.put(usuario, libro);
+            return leidos;
         }
-        public ArrayList<String> getLibrosLeidos(String usuario) {
+        public ArrayList<Libro> getLibrosLeidos(String usuario) {
             return leidos.get(usuario);
         }
-    }
-    public static void main(String[] args) {
-        Usuario.añadirUsuario("usuario1", "correo1");
     }
 }
